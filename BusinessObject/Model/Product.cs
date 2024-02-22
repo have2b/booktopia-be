@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
+
+namespace BusinessObject.Model;
+
+[Table("products")]
+public class Product
+{
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
+    public int ProductId { get; set; }
+
+    [Required, StringLength(200)] public string Name { get; set; }
+
+    [Required, Precision(4, 2)] public decimal Price { get; set; }
+    [Required] public int Quantity { get; set; }
+    [Required, ForeignKey("CategoryId")] public int CategoryId { get; set; }
+    [StringLength(255)] public string Description { get; set; }
+
+    [StringLength(255), DataType(DataType.ImageUrl)]
+    public string ImageUrl { get; set; } = "default_product.png";
+
+    public bool IsActive { get; set; } = true;
+    public DateTime CreatedAt { get; private set; } = DateTime.Now;
+    public DateTime LastModifiedAt { get; private set; } = DateTime.Now;
+
+    [JsonIgnore] public virtual Category? Category { get; set; }
+    [JsonIgnore] public virtual ICollection<OrderDetail>? OrderDetails { get; set; } = new List<OrderDetail>();
+    [JsonIgnore] public virtual ICollection<GoodsReceiptDetail>? GoodsReceiptDetails { get; set; } = new List<GoodsReceiptDetail>();
+}
