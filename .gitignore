@@ -1,0 +1,8 @@
+/BusinessObject/bin
+/BusinessObject/obj
+/DataAccess/bin
+/DataAccess/obj
+/BookStoreAPI/bin
+/BookStoreAPI/obj
+/BookStoreAPI/appsettings.Development.json
+/.vs
