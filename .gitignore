@@ -7,3 +7,5 @@
 /BookStoreAPI/appsettings.Development.json
 /.vs
 /.idea
+/BookStoreAPI/appsettings.json
+/BusinessObject/appsettings.json
