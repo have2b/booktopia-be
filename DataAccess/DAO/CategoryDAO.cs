@@ -14,7 +14,6 @@ public class CategoryDAO
         new Lazy<CategoryDAO>(() => new CategoryDAO(new AppDbContext()));
 
     private readonly AppDbContext _context;
-    private readonly ILogger<CategoryDAO> _logger;
 
     private CategoryDAO(AppDbContext context)
     {

@@ -1,6 +1,5 @@
-using BusinessObject.DTO;
+﻿using BusinessObject.DTO;
 using DataAccess.Exceptions;
-using DataAccess.Repository;
 using DataAccess.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +7,11 @@ namespace BookStoreAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CategoriesController : ControllerBase
+public class PublishersController : ControllerBase
 {
-    private readonly ICategoryRepository _repository;
+    private readonly IPublisherRepository _repository;
 
-    public CategoriesController(ICategoryRepository repository)
+    public PublishersController(IPublisherRepository repository)
     {
         _repository = repository;
     }
@@ -22,13 +21,13 @@ public class CategoriesController : ControllerBase
     {
         try
         {
-            var categories = await _repository.GetCategories();
-            if (!categories.Any())
+            var publishers = await _repository.GetPublishers();
+            if (!publishers.Any())
             {
-                return NotFound("No categories found.");
+                return NotFound("No publishers found.");
             }
 
-            return Ok(categories);
+            return Ok(publishers);
         }
         catch (Exception ex)
         {
@@ -41,12 +40,12 @@ public class CategoriesController : ControllerBase
     {
         try
         {
-            var category = await _repository.GetCategoryById(id);
-            return Ok(category);
+            var publisher = await _repository.GetPublisherById(id);
+            return Ok(publisher);
         }
-        catch (CategoryNotFoundException ex)
+        catch (PublisherNotFoundException ex)
         {
-            return NotFound($"Category with id: {id} not found.");
+            return NotFound($"Publisher with id: {id} not found.");
         }
         catch (Exception ex)
         {
@@ -55,13 +54,13 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] CategoryDTO model)
+    public async Task<IActionResult> Post([FromBody] PublisherDTO model)
     {
         try
         {
-            var createdCategory = await _repository.AddCategory(model);
+            var createdPublisher = await _repository.AddPublisher(model);
 
-            return CreatedAtAction(nameof(Get), createdCategory);
+            return CreatedAtAction(nameof(Get), createdPublisher);
         }
         catch (Exception ex)
         {
@@ -70,17 +69,17 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, [FromBody] CategoryDTO model)
+    public async Task<IActionResult> Put(int id, [FromBody] PublisherDTO model)
     {
         try
         {
-            var updatedCategory = await _repository.UpdateCategory(id, model);
+            var updatedPublisher = await _repository.UpdatePublisher(id, model);
 
-            return Ok(updatedCategory);
+            return Ok(updatedPublisher);
         }
-        catch (CategoryNotFoundException ex)
+        catch (PublisherNotFoundException ex)
         {
-            return NotFound($"Category with id: {id} not found.");
+            return NotFound($"Publisher with id: {id} not found.");
         }
         catch (Exception ex)
         {
@@ -93,13 +92,13 @@ public class CategoriesController : ControllerBase
     {
         try
         {
-            var deletedCategory = await _repository.DeleteCategory(id);
+            var deletedPublisher = await _repository.DeletePublisher(id);
 
-            return Ok(deletedCategory);
+            return Ok(deletedPublisher);
         }
-        catch (CategoryNotFoundException ex)
+        catch (PublisherNotFoundException ex)
         {
-            return NotFound($"Category with id: {id} not found.");
+            return NotFound($"Publisher with id: {id} not found.");
         }
         catch (Exception ex)
         {
