@@ -43,21 +43,6 @@ public class AppDbContext : IdentityDbContext<User>
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<GoodsReceiptDetail>().HasKey(g => new { g.GoodsReceiptId, g.ProductId });
-
-        modelBuilder.Entity<GoodsReceiptDetail>()
-            .HasOne(g => g.GoodsReceipt)
-            .WithMany(g => g.GoodsReceiptDetails)
-            .HasForeignKey(g => g.GoodsReceiptId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
-        modelBuilder.Entity<GoodsReceiptDetail>()
-            .HasOne(g => g.Product)
-            .WithMany(g => g.GoodsReceiptDetails)
-            .HasForeignKey(g => g.ProductId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
-
         var roleOfAdmin = new IdentityRole(UserRole.Admin);
         roleOfAdmin.NormalizedName = UserRole.Admin.ToUpper();
         var roleOfUser = new IdentityRole(UserRole.User);
@@ -103,7 +88,5 @@ public class AppDbContext : IdentityDbContext<User>
     public DbSet<Product> Products { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
-    public DbSet<GoodsReceipt> GoodsReceipts { get; set; }
-    public DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
     public DbSet<Publisher> Publishers { get; set; }
 }

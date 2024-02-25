@@ -19,6 +19,7 @@ public class Product
     [Required] public int Quantity { get; set; }
     [Required, ForeignKey("CategoryId")] public int CategoryId { get; set; }
     [StringLength(255)] public string Description { get; set; }
+    [Required, ForeignKey("PublisherId")] public int PublisherId { get; set; }
 
     [StringLength(255), DataType(DataType.ImageUrl)]
     public string ImageUrl { get; set; } = "default_product.png";
@@ -29,5 +30,4 @@ public class Product
 
     [JsonIgnore] public virtual Category? Category { get; set; }
     [JsonIgnore] public virtual ICollection<OrderDetail>? OrderDetails { get; set; } = new List<OrderDetail>();
-    [JsonIgnore] public virtual ICollection<GoodsReceiptDetail>? GoodsReceiptDetails { get; set; } = new List<GoodsReceiptDetail>();
 }

@@ -13,6 +13,4 @@ public class Publisher
 
     [Required, StringLength(100)] public string Name { get; set; }
     [Required, StringLength(20)] public string ContactNumber { get; set; }
-
-    [JsonIgnore] public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; } = new List<GoodsReceipt>();
 }
