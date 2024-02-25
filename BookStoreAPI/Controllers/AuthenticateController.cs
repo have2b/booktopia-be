@@ -1,7 +1,6 @@
 ﻿using BusinessObject.DTO;
 using BusinessObject.Model;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -111,35 +110,7 @@ namespace BookStoreAPI.Controllers
 
             //Admin has full authority of all role
             await _userManager.AddToRoleAsync(user, UserRole.Admin);
-            await _userManager.AddToRoleAsync(user, UserRole.Staff);
             await _userManager.AddToRoleAsync(user, UserRole.User);
-
-            return Ok(new { Message = "User created successfully!" });
-        }
-
-        [Authorize(Roles = UserRole.Admin)]
-        [HttpPost]
-        [Route("register-staff")]
-        public async Task<IActionResult> RegisterStaff([FromBody] RegisterRequest model)
-        {
-            var userExists = await _userManager.FindByNameAsync(model.Username);
-            if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "User already exists!" });
-
-            User user = new()
-            {
-                Email = model.Email,
-                SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.Username,
-                PhoneNumber = model.PhoneNumber,
-                Address = model.Address,
-                Name = model.Name
-            };
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "User creation failed! Please check user details and try again." });
-
-            await _userManager.AddToRoleAsync(user, UserRole.Staff);
 
             return Ok(new { Message = "User created successfully!" });
         }

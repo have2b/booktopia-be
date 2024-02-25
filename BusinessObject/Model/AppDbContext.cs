@@ -58,20 +58,17 @@ public class AppDbContext : IdentityDbContext<User>
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
-        var RoleOfAdmin = new IdentityRole(UserRole.Admin);
-        RoleOfAdmin.NormalizedName = UserRole.Admin.ToUpper();
-        var RoleOfUser = new IdentityRole(UserRole.User);
-        RoleOfUser.NormalizedName = UserRole.User.ToUpper();
-        var RoleOfStaff = new IdentityRole(UserRole.Staff);
-        RoleOfStaff.NormalizedName = UserRole.Staff.ToUpper();
+        var roleOfAdmin = new IdentityRole(UserRole.Admin);
+        roleOfAdmin.NormalizedName = UserRole.Admin.ToUpper();
+        var roleOfUser = new IdentityRole(UserRole.User);
+        roleOfUser.NormalizedName = UserRole.User.ToUpper();
         modelBuilder.Entity<IdentityRole>().HasData(
-            RoleOfAdmin,
-            RoleOfUser,
-            RoleOfStaff
+            roleOfAdmin,
+            roleOfUser
             );
 
         var hasher = new PasswordHasher<IdentityUser>();
-        var PrincipalAdmin = new User
+        var principalAdmin = new User
         {
             UserName = "admin",
             NormalizedUserName = "ADMIN",
@@ -80,22 +77,17 @@ public class AppDbContext : IdentityDbContext<User>
             Name = "PrincipalAdmin",
             IsActive = true
         };
-        modelBuilder.Entity<User>().HasData(PrincipalAdmin);
+        modelBuilder.Entity<User>().HasData(principalAdmin);
         modelBuilder.Entity<IdentityUserRole<string>>().HasData(
             new IdentityUserRole<string>
             {
-                RoleId = RoleOfAdmin.Id,
-                UserId = PrincipalAdmin.Id
+                RoleId = roleOfAdmin.Id,
+                UserId = principalAdmin.Id
             },
             new IdentityUserRole<string>
             {
-                RoleId = RoleOfStaff.Id,
-                UserId = PrincipalAdmin.Id
-            },
-            new IdentityUserRole<string>
-            {
-                RoleId = RoleOfUser.Id,
-                UserId = PrincipalAdmin.Id
+                RoleId = roleOfUser.Id,
+                UserId = principalAdmin.Id
             }
             );
         modelBuilder.Entity<Category>().HasData(
