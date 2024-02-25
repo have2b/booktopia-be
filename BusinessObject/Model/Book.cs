@@ -7,15 +7,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BusinessObject.Model;
 
-[Table("products")]
-public class Product
+[Table("books")]
+public class Book
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
     public int ProductId { get; set; }
 
     [Required, StringLength(200)] public string Name { get; set; }
-
-    [Required, Precision(4, 2)] public decimal Price { get; set; }
+    [Required, StringLength(200)] public string Author { get; set; }
+    [Required, Precision(4, 2)] public decimal CostPrice { get; set; }
+    [Required, Precision(4, 2)] public decimal SellPrice { get; set; }
     [Required] public int Quantity { get; set; }
     [Required, ForeignKey("CategoryId")] public int CategoryId { get; set; }
     [StringLength(255)] public string Description { get; set; }

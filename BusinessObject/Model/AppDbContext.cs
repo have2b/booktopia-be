@@ -28,7 +28,7 @@ public class AppDbContext : IdentityDbContext<User>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<OrderDetail>().HasKey(o => new { o.OrderId, o.ProductId });
+        modelBuilder.Entity<OrderDetail>().HasKey(o => new { o.OrderId, o.BookId });
         modelBuilder.Entity<OrderDetail>()
             .HasOne(o => o.Order)
             .WithMany(o => o.OrderDetails)
@@ -37,9 +37,9 @@ public class AppDbContext : IdentityDbContext<User>
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<OrderDetail>()
-            .HasOne(o => o.Product)
+            .HasOne(o => o.Book)
             .WithMany(o => o.OrderDetails)
-            .HasForeignKey(o => o.ProductId)
+            .HasForeignKey(o => o.BookId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
@@ -85,7 +85,7 @@ public class AppDbContext : IdentityDbContext<User>
     }
 
     public DbSet<Category> Categories { get; set; }
-    public DbSet<Product> Products { get; set; }
+    public DbSet<Book> Books { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<Publisher> Publishers { get; set; }

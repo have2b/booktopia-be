@@ -24,8 +24,6 @@ public class Order
 
     public StatusType Status { get; set; } = StatusType.Processing;
 
-    [Precision(4, 2)] public decimal TotalPrice { get; set; }
-
     [Required, StringLength(200)] public string? ShipAddress { get; set; }
     public DateTime CreatedAt { get; private set; } = DateTime.Now;
 
