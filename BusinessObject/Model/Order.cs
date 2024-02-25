@@ -20,7 +20,7 @@ public class Order
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
     public int OrderId { get; set; }
 
-    [Required, ForeignKey("UserId")] public int UserId { get; set; }
+    [Required, ForeignKey("UserId")] public string UserId { get; set; }
 
     public StatusType Status { get; set; } = StatusType.Processing;
 
