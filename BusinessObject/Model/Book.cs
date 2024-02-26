@@ -11,13 +11,13 @@ namespace BusinessObject.Model;
 public class Book
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
-    public int ProductId { get; set; }
+    public int BookId { get; set; }
 
     [Required, StringLength(200)] public string Name { get; set; }
     [Required, StringLength(200)] public string Author { get; set; }
     [Required, Precision(4, 2)] public decimal CostPrice { get; set; }
     [Required, Precision(4, 2)] public decimal SellPrice { get; set; }
-    [Required] public int Quantity { get; set; }
+    [Required] public int Quantity { get; set; } = 0;
     [Required, ForeignKey("CategoryId")] public int CategoryId { get; set; }
     [StringLength(255)] public string Description { get; set; }
     [Required, ForeignKey("PublisherId")] public int PublisherId { get; set; }

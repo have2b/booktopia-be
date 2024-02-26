@@ -24,11 +24,11 @@ namespace BusinessObject.Migrations
 
             modelBuilder.Entity("BusinessObject.Model.Book", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("BookId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookId"), 1L, 1);
 
                     b.Property<string>("Author")
                         .IsRequired()
@@ -76,7 +76,7 @@ namespace BusinessObject.Migrations
                         .HasPrecision(4, 2)
                         .HasColumnType("decimal(4,2)");
 
-                    b.HasKey("ProductId");
+                    b.HasKey("BookId");
 
                     b.HasIndex("CategoryId");
 
@@ -298,20 +298,20 @@ namespace BusinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eb17aafc-9c51-486b-91d4-68a0388d6e25",
+                            Id = "23f2dc71-60c7-41bb-9a92-41ef8d6a4c61",
                             AccessFailedCount = 0,
                             Address = "",
-                            ConcurrencyStamp = "554fb3e0-7ebb-4459-92fc-ec1d62e7abef",
-                            CreatedAt = new DateTime(2024, 2, 25, 20, 59, 33, 119, DateTimeKind.Local).AddTicks(6387),
+                            ConcurrencyStamp = "9937ada5-55af-4c27-b095-920a226b7c33",
+                            CreatedAt = new DateTime(2024, 2, 26, 13, 41, 40, 247, DateTimeKind.Local).AddTicks(3455),
                             EmailConfirmed = false,
                             IsActive = true,
-                            LastModifiedAt = new DateTime(2024, 2, 25, 20, 59, 33, 119, DateTimeKind.Local).AddTicks(6397),
+                            LastModifiedAt = new DateTime(2024, 2, 26, 13, 41, 40, 247, DateTimeKind.Local).AddTicks(3462),
                             LockoutEnabled = false,
                             Name = "PrincipalAdmin",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJt0KPn6ECdSxmR9s4NIpbOsPTYFob3tGGF8ZQaxpztjm2iIT/jRK3FCh9EhVzfz5g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKczx8h6OKsIjEmqRXkIujpa0Fp7ZgrAcsa2mlPluerq9UcHpm/8+HuBs2kJBaVFHw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8374df5f-8a6c-4109-b514-f7f93f9ef1ac",
+                            SecurityStamp = "18ef3d26-da3f-4819-a272-602227df4ae3",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -346,15 +346,15 @@ namespace BusinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0e0d20cc-ecc5-4326-bc73-2acc2c15c7de",
-                            ConcurrencyStamp = "a0f09f32-57ee-4b39-b49b-2245e3fa01dd",
+                            Id = "6cb19d72-1182-49b1-87f2-171ff0a50bad",
+                            ConcurrencyStamp = "9d396de3-4185-49a7-8934-e6098ab9736c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "207a4154-2f5d-456c-977c-db9400792c85",
-                            ConcurrencyStamp = "4f7967aa-95f9-43ae-80f0-69f72f5f457b",
+                            Id = "0bd62814-ca94-4743-8677-579fd9c6466d",
+                            ConcurrencyStamp = "e3d151fd-d0f9-43c8-9768-0f8f46c4c9b0",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -449,13 +449,13 @@ namespace BusinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "eb17aafc-9c51-486b-91d4-68a0388d6e25",
-                            RoleId = "0e0d20cc-ecc5-4326-bc73-2acc2c15c7de"
+                            UserId = "23f2dc71-60c7-41bb-9a92-41ef8d6a4c61",
+                            RoleId = "6cb19d72-1182-49b1-87f2-171ff0a50bad"
                         },
                         new
                         {
-                            UserId = "eb17aafc-9c51-486b-91d4-68a0388d6e25",
-                            RoleId = "207a4154-2f5d-456c-977c-db9400792c85"
+                            UserId = "23f2dc71-60c7-41bb-9a92-41ef8d6a4c61",
+                            RoleId = "0bd62814-ca94-4743-8677-579fd9c6466d"
                         });
                 });
 

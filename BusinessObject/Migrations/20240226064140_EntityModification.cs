@@ -78,7 +78,7 @@ namespace BusinessObject.Migrations
                 name: "books",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    BookId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Author = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
@@ -95,7 +95,7 @@ namespace BusinessObject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_books", x => x.ProductId);
+                    table.PrimaryKey("PK_books", x => x.BookId);
                     table.ForeignKey(
                         name: "FK_books_categories_CategoryId",
                         column: x => x.CategoryId,
@@ -107,27 +107,27 @@ namespace BusinessObject.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "0e0d20cc-ecc5-4326-bc73-2acc2c15c7de", "a0f09f32-57ee-4b39-b49b-2245e3fa01dd", "Admin", "ADMIN" });
+                values: new object[] { "0bd62814-ca94-4743-8677-579fd9c6466d", "e3d151fd-d0f9-43c8-9768-0f8f46c4c9b0", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "207a4154-2f5d-456c-977c-db9400792c85", "4f7967aa-95f9-43ae-80f0-69f72f5f457b", "User", "USER" });
+                values: new object[] { "6cb19d72-1182-49b1-87f2-171ff0a50bad", "9d396de3-4185-49a7-8934-e6098ab9736c", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "CreatedAt", "Email", "EmailConfirmed", "IsActive", "LastModifiedAt", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "eb17aafc-9c51-486b-91d4-68a0388d6e25", 0, "", "554fb3e0-7ebb-4459-92fc-ec1d62e7abef", new DateTime(2024, 2, 25, 20, 59, 33, 119, DateTimeKind.Local).AddTicks(6387), null, false, true, new DateTime(2024, 2, 25, 20, 59, 33, 119, DateTimeKind.Local).AddTicks(6397), false, null, "PrincipalAdmin", null, "ADMIN", "AQAAAAEAACcQAAAAEJt0KPn6ECdSxmR9s4NIpbOsPTYFob3tGGF8ZQaxpztjm2iIT/jRK3FCh9EhVzfz5g==", null, false, "8374df5f-8a6c-4109-b514-f7f93f9ef1ac", false, "admin" });
+                values: new object[] { "23f2dc71-60c7-41bb-9a92-41ef8d6a4c61", 0, "", "9937ada5-55af-4c27-b095-920a226b7c33", new DateTime(2024, 2, 26, 13, 41, 40, 247, DateTimeKind.Local).AddTicks(3455), null, false, true, new DateTime(2024, 2, 26, 13, 41, 40, 247, DateTimeKind.Local).AddTicks(3462), false, null, "PrincipalAdmin", null, "ADMIN", "AQAAAAEAACcQAAAAEKczx8h6OKsIjEmqRXkIujpa0Fp7ZgrAcsa2mlPluerq9UcHpm/8+HuBs2kJBaVFHw==", null, false, "18ef3d26-da3f-4819-a272-602227df4ae3", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "0e0d20cc-ecc5-4326-bc73-2acc2c15c7de", "eb17aafc-9c51-486b-91d4-68a0388d6e25" });
+                values: new object[] { "0bd62814-ca94-4743-8677-579fd9c6466d", "23f2dc71-60c7-41bb-9a92-41ef8d6a4c61" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "207a4154-2f5d-456c-977c-db9400792c85", "eb17aafc-9c51-486b-91d4-68a0388d6e25" });
+                values: new object[] { "6cb19d72-1182-49b1-87f2-171ff0a50bad", "23f2dc71-60c7-41bb-9a92-41ef8d6a4c61" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_order_details_BookId",
@@ -144,7 +144,7 @@ namespace BusinessObject.Migrations
                 table: "order_details",
                 column: "BookId",
                 principalTable: "books",
-                principalColumn: "ProductId",
+                principalColumn: "BookId",
                 onDelete: ReferentialAction.Cascade);
         }
 
@@ -168,27 +168,27 @@ namespace BusinessObject.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "0e0d20cc-ecc5-4326-bc73-2acc2c15c7de", "eb17aafc-9c51-486b-91d4-68a0388d6e25" });
+                keyValues: new object[] { "0bd62814-ca94-4743-8677-579fd9c6466d", "23f2dc71-60c7-41bb-9a92-41ef8d6a4c61" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "207a4154-2f5d-456c-977c-db9400792c85", "eb17aafc-9c51-486b-91d4-68a0388d6e25" });
+                keyValues: new object[] { "6cb19d72-1182-49b1-87f2-171ff0a50bad", "23f2dc71-60c7-41bb-9a92-41ef8d6a4c61" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "0e0d20cc-ecc5-4326-bc73-2acc2c15c7de");
+                keyValue: "0bd62814-ca94-4743-8677-579fd9c6466d");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "207a4154-2f5d-456c-977c-db9400792c85");
+                keyValue: "6cb19d72-1182-49b1-87f2-171ff0a50bad");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "eb17aafc-9c51-486b-91d4-68a0388d6e25");
+                keyValue: "23f2dc71-60c7-41bb-9a92-41ef8d6a4c61");
 
             migrationBuilder.DropColumn(
                 name: "BookId",

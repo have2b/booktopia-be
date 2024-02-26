@@ -11,6 +11,8 @@ public class MapperConfig
         var config = new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<CategoryDTO, Category>();
+            cfg.CreateMap<PublisherDTO, Publisher>();
+            cfg.CreateMap<BookDTO, Book>();
         });
 
         var mapper = new Mapper(config);
