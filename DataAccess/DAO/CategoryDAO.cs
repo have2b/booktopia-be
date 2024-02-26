@@ -23,9 +23,12 @@ public class CategoryDAO
     public static CategoryDAO Instance => _instance.Value;
 
     // Get all categories
-    public async Task<List<Category>> GetCategoriesAsync()
+    public async Task<List<Category>> GetCategoriesAsync(RequestDTO input)
     {
-        return await _context.Categories.ToListAsync();
+        return await _context.Categories
+            .Skip(input.PageIndex * input.PageSize)
+            .Take(input.PageSize)
+            .ToListAsync();
     }
 
     // Get a category by Id

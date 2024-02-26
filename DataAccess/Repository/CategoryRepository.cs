@@ -8,7 +8,7 @@ namespace DataAccess.Repository;
 public class CategoryRepository : ICategoryRepository
 {
     private readonly CategoryDAO _dao = CategoryDAO.Instance;
-    public Task<List<Category>> GetCategories() => _dao.GetCategoriesAsync();
+    public Task<List<Category>> GetCategories(RequestDTO input) => _dao.GetCategoriesAsync(input);
     public Task<Category> GetCategoryById(int id) => _dao.GetCategoryByIdAsync(id);
     public Task<Category> AddCategory(CategoryDTO model) => _dao.AddCategoryAsync(model);
     public Task<Category> UpdateCategory(int id, CategoryDTO model) => _dao.UpdateCategoryAsync(id, model);

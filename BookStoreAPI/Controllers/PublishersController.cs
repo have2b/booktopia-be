@@ -1,12 +1,15 @@
 ﻿using BusinessObject.DTO;
+using BusinessObject.Model;
 using DataAccess.Exceptions;
 using DataAccess.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = UserRole.Admin)]
 public class PublishersController : ControllerBase
 {
     private readonly IPublisherRepository _repository;
@@ -17,39 +20,61 @@ public class PublishersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    [AllowAnonymous]
+    public async Task<IActionResult> Get([FromQuery] RequestDTO input)
     {
         try
         {
-            var publishers = await _repository.GetPublishers();
+            var publishers = await _repository.GetPublishers(input);
             if (!publishers.Any())
             {
-                return NotFound("No publishers found.");
+                return NotFound(new ResponseDTO<Object>()
+                {
+                    Success = false,
+                    Payload = null,
+                    Error = new ErrorDetails() { Code = 404, Message = "No publishers found." }
+                });
             }
 
-            return Ok(publishers);
+            return Ok(new ResponseDTO<Publisher[]>() { Payload = publishers.ToArray() });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
+            });
         }
     }
 
     [HttpGet("{id}")]
+    [AllowAnonymous]
     public async Task<IActionResult> Get(int id)
     {
         try
         {
             var publisher = await _repository.GetPublisherById(id);
-            return Ok(publisher);
+            return Ok(new ResponseDTO<Publisher>() { Payload = publisher });
         }
         catch (PublisherNotFoundException ex)
         {
-            return NotFound($"Publisher with id: {id} not found.");
+            return NotFound(new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 404, Message = $"Publisher with id: {id} not found." }
+            });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
+            });
         }
     }
 
@@ -64,7 +89,12 @@ public class PublishersController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
+            });
         }
     }
 
@@ -79,11 +109,21 @@ public class PublishersController : ControllerBase
         }
         catch (PublisherNotFoundException ex)
         {
-            return NotFound($"Publisher with id: {id} not found.");
+            return NotFound(new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 404, Message = $"Publisher with id: {id} not found." }
+            });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
+            });
         }
     }
 
@@ -98,11 +138,21 @@ public class PublishersController : ControllerBase
         }
         catch (PublisherNotFoundException ex)
         {
-            return NotFound($"Publisher with id: {id} not found.");
+            return NotFound(new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 404, Message = $"Publisher with id: {id} not found." }
+            });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, "Internal server error. Please try again later.");
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
+            });
         }
     }
 }

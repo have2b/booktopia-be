@@ -50,22 +50,32 @@ namespace BookStoreAPI.Controllers
 
                 var token = GetToken(authClaims);
 
-                return Ok(new
+                return Ok(new ResponseDTO<string>()
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    Payload = new JwtSecurityTokenHandler().WriteToken(token)
                 });
             }
-            return Unauthorized();
+
+            return Unauthorized(new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 401, Message = "Unauthorized" }
+            });
         }
-        
+
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterRequest model)
         {
             var userExists = await _userManager.FindByNameAsync(model.Username);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "User already exists!" });
+                return Conflict(new ResponseDTO<Object>()
+                {
+                    Success = false,
+                    Payload = null,
+                    Error = new ErrorDetails() { Code = 409, Message = "User already exists!" }
+                });
 
             User user = new()
             {
@@ -78,11 +88,17 @@ namespace BookStoreAPI.Controllers
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "User creation failed! Please check user details and try again." });
+                return StatusCode(500, new ResponseDTO<Object>()
+                {
+                    Success = false,
+                    Payload = null,
+                    Error = new ErrorDetails()
+                        { Code = 500, Message = "Internal server error. Please try again later." }
+                });
 
             await _userManager.AddToRoleAsync(user, UserRole.User);
 
-            return Ok(new { Message = "User created successfully!" });
+            return Ok(new ResponseDTO<User>() { Payload = user });
         }
 
         [Authorize(Roles = UserRole.Admin)]
@@ -92,7 +108,12 @@ namespace BookStoreAPI.Controllers
         {
             var userExists = await _userManager.FindByNameAsync(model.Username);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "User already exists!" });
+                return Conflict(new ResponseDTO<Object>()
+                {
+                    Success = false,
+                    Payload = null,
+                    Error = new ErrorDetails() { Code = 409, Message = "User already exists!" }
+                });
 
             User user = new()
             {
@@ -105,14 +126,20 @@ namespace BookStoreAPI.Controllers
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "User creation failed! Please check user details and try again." });
+                return StatusCode(500, new ResponseDTO<Object>()
+                {
+                    Success = false,
+                    Payload = null,
+                    Error = new ErrorDetails()
+                        { Code = 500, Message = "Internal server error. Please try again later." }
+                });
 
 
             //Admin has full authority of all role
             await _userManager.AddToRoleAsync(user, UserRole.Admin);
             await _userManager.AddToRoleAsync(user, UserRole.User);
 
-            return Ok(new { Message = "User created successfully!" });
+            return Ok(new ResponseDTO<User>() { Payload = user });
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
@@ -123,7 +150,7 @@ namespace BookStoreAPI.Controllers
                 expires: DateTime.Now.AddHours(3),
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-                );
+            );
 
             return token;
         }
