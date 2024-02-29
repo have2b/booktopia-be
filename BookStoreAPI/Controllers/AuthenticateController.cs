@@ -92,12 +92,12 @@ namespace BookStoreAPI.Controllers
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
-                return StatusCode(500, new ResponseDTO<Object>()
+                return StatusCode(400, new ResponseDTO<Object>()
                 {
                     Success = false,
                     Payload = null,
                     Error = new ErrorDetails()
-                    { Code = 500, Message = result.Errors.First().Description }
+                    { Code = 400, Message = result.Errors.First().Description }
                 });
 
             await _userManager.AddToRoleAsync(user, UserRole.User);
@@ -130,12 +130,12 @@ namespace BookStoreAPI.Controllers
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
-                return StatusCode(500, new ResponseDTO<Object>()
+                return StatusCode(400, new ResponseDTO<Object>()
                 {
                     Success = false,
                     Payload = null,
                     Error = new ErrorDetails()
-                    { Code = 500, Message = result.Errors.First().Description }
+                    { Code = 400, Message = result.Errors.First().Description }
                 });
 
 
