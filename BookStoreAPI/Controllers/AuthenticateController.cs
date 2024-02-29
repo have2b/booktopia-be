@@ -35,6 +35,10 @@ namespace BookStoreAPI.Controllers
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
+                if (!user.IsActive)
+                {
+                    return StatusCode(StatusCodes.Status403Forbidden, new { Message = "Account is inactive!!!" });
+                }
                 var userRoles = await _userManager.GetRolesAsync(user);
 
                 var authClaims = new List<Claim>
@@ -93,7 +97,7 @@ namespace BookStoreAPI.Controllers
                     Success = false,
                     Payload = null,
                     Error = new ErrorDetails()
-                        { Code = 500, Message = "Internal server error. Please try again later." }
+                        { Code = 500, Message = result.Errors.ToList() }
                 });
 
             await _userManager.AddToRoleAsync(user, UserRole.User);
