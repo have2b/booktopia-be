@@ -13,6 +13,8 @@ public class MapperConfig
             cfg.CreateMap<CategoryDTO, Category>();
             cfg.CreateMap<PublisherDTO, Publisher>();
             cfg.CreateMap<BookDTO, Book>();
+            cfg.CreateMap<OrderDTO, Order>();
+            cfg.CreateMap<OrderDetailDTO, OrderDetail>();
         });
 
         var mapper = new Mapper(config);
