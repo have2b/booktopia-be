@@ -97,7 +97,7 @@ namespace BookStoreAPI.Controllers
                     Success = false,
                     Payload = null,
                     Error = new ErrorDetails()
-                        { Code = 500, Message = result.Errors.ToList() }
+                    { Code = 500, Message = result.Errors.First().Description }
                 });
 
             await _userManager.AddToRoleAsync(user, UserRole.User);
@@ -135,7 +135,7 @@ namespace BookStoreAPI.Controllers
                     Success = false,
                     Payload = null,
                     Error = new ErrorDetails()
-                        { Code = 500, Message = "Internal server error. Please try again later." }
+                    { Code = 500, Message = result.Errors.First().Description }
                 });
 
 
