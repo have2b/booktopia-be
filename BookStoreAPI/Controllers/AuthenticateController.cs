@@ -35,6 +35,10 @@ namespace BookStoreAPI.Controllers
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
+                if (!user.IsActive)
+                {
+                    return StatusCode(StatusCodes.Status403Forbidden, new { Message = "Account is inactive!!!" });
+                }
                 var userRoles = await _userManager.GetRolesAsync(user);
 
                 var authClaims = new List<Claim>
@@ -58,7 +62,7 @@ namespace BookStoreAPI.Controllers
             }
             return Unauthorized();
         }
-        
+
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterRequest model)
@@ -78,7 +82,7 @@ namespace BookStoreAPI.Controllers
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "User creation failed! Please check user details and try again." });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = result.Errors.ToList() });
 
             await _userManager.AddToRoleAsync(user, UserRole.User);
 
