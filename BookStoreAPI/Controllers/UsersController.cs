@@ -59,7 +59,7 @@ namespace BookStoreAPI.Controllers
                 var user = await _repository.GetUserByUserNameAsync(userName);
                 return Ok(new ResponseDTO<UserDTO>() { Payload = user });
             }
-            catch (CategoryNotFoundException ex)
+            catch (UserNotFoundException ex)
             {
                 return NotFound(new ResponseDTO<Object>()
                 {
@@ -87,7 +87,7 @@ namespace BookStoreAPI.Controllers
                 var user = await _repository.GetUserByUserNameAsync(userName);
                 return Ok(new ResponseDTO<UserDTO>() { Payload = user });
             }
-            catch (CategoryNotFoundException ex)
+            catch (UserNotFoundException ex)
             {
                 return NotFound(new ResponseDTO<Object>()
                 {
