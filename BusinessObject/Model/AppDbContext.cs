@@ -44,8 +44,10 @@ public class AppDbContext : IdentityDbContext<User>
             .OnDelete(DeleteBehavior.Cascade);
 
         var roleOfAdmin = new IdentityRole(UserRole.Admin);
+        roleOfAdmin.Id = "eda5ef8e-8c93-464d-8e78-2f855502b2ae";
         roleOfAdmin.NormalizedName = UserRole.Admin.ToUpper();
         var roleOfUser = new IdentityRole(UserRole.User);
+        roleOfUser.Id = "fec23b8a-78a2-48bf-8ee7-534b72c3be15";
         roleOfUser.NormalizedName = UserRole.User.ToUpper();
         modelBuilder.Entity<IdentityRole>().HasData(
             roleOfAdmin,
@@ -62,6 +64,7 @@ public class AppDbContext : IdentityDbContext<User>
             Name = "PrincipalAdmin",
             IsActive = true
         };
+        principalAdmin.Id = "c8f0c882-21b4-4d61-84d2-a7cb32964b84";
         modelBuilder.Entity<User>().HasData(principalAdmin);
         modelBuilder.Entity<IdentityUserRole<string>>().HasData(
             new IdentityUserRole<string>
