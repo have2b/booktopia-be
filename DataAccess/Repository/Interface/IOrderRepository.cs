@@ -6,5 +6,5 @@ namespace DataAccess.Repository.Interface;
 public interface IOrderRepository
 {
     Task<List<Order>> GetOrders(RequestDTO input);
-    Task<Order> AddOrder(OrderDTO model);
+    Task<Order> AddOrder(string userName, OrderDTO model);
 }

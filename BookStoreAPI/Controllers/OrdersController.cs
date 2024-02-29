@@ -4,7 +4,6 @@ using DataAccess.Exceptions;
 using DataAccess.Repository.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookStoreAPI.Controllers;
 
@@ -53,10 +52,20 @@ public class OrdersController : ControllerBase
     public async Task<IActionResult> Post([FromBody] OrderDTO model)
     {
         Order order = null;
+        string userName = User.FindFirst("username")?.Value;
         try
         {
-            order = await _repository.AddOrder(model);
+            order = await _repository.AddOrder(userName, model);
             return Ok(new ResponseDTO<Order>() { Payload = order });
+        }
+        catch (UserNotFoundException ex)
+        {
+            return NotFound(new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 404, Message = $"User {userName} not found." }
+            });
         }
         catch (InsufficientQuantityException ex)
         {
@@ -65,6 +74,15 @@ public class OrdersController : ControllerBase
                 Success = false,
                 Payload = null,
                 Error = new ErrorDetails() { Code = 500, Message = ex.Message }
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
             });
         }
     }
