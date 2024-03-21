@@ -1,0 +1,101 @@
+BookId,BookName,Author,CostPrice,SellPrice,Quantity,CategoryId,Description,PublisherId,ImageUrl,IsActive,CreatedAt,LastModifiedAt
+1,Customizable zero administration focus group,Henry Conner,61.12,23.3,15,5,Four account whom bank he.,16,default_product.png,TRUE,9/17/2023,2/3/2024
+2,Profound bottom-line matrix,Heather Petty,62.46,28.15,34,1,After owner build site study professional wide.,4,default_product.png,FALSE,6/23/2023,1/16/2024
+3,Business-focused system-worthy intranet,Lisa Yu,53.91,55.43,66,6,Onto scene dark democratic.,19,default_product.png,FALSE,9/14/2020,1/5/2024
+4,Cross-group national project,Olivia Boyle,40.01,92.14,55,2,Cost nothing bring.,11,default_product.png,TRUE,7/5/2023,1/18/2024
+5,Cross-group well-modulated service-desk,Rebecca Fuller,83.59,78.76,100,6,Weight kitchen memory low exist new.,1,default_product.png,TRUE,11/21/2020,3/6/2024
+6,Cross-group clear-thinking array,Joseph Monroe,95.17,75.96,96,2,Past center not lay admit become debate.,3,default_product.png,FALSE,12/15/2020,1/2/2024
+7,Extended systemic matrix,Benjamin Robertson,34.61,5.32,71,3,Later yard west for pretty pressure ago.,5,default_product.png,FALSE,10/9/2021,3/3/2024
+8,Upgradable clear-thinking system engine,Valerie Hensley,6.86,41.02,96,2,Heart attorney deep wear raise per.,8,default_product.png,FALSE,1/7/2024,3/10/2024
+9,Mandatory disintermediate website,Gloria Griffith,43.8,21,67,5,Whatever happen large window lose about see.,7,default_product.png,FALSE,10/11/2023,1/16/2024
+10,Persistent full-range monitoring,Teresa Wright,77.26,55.68,46,4,Line above no change heavy particular.,15,default_product.png,TRUE,5/21/2022,2/14/2024
+11,Versatile contextually-based frame,William Kent,1.97,19.02,42,2,World executive score side.,12,default_product.png,FALSE,12/9/2023,1/27/2024
+12,Extended heuristic capacity,Nancy Smith,90.07,82.17,96,1,No admit southern guess soon.,9,default_product.png,FALSE,6/15/2020,3/4/2024
+13,Automated systemic concept,Shaun Fisher,70.1,13.27,62,1,Down change south interest.,11,default_product.png,FALSE,4/3/2023,3/14/2024
+14,Sharable full-range access,Kathy Smith,48.04,28.34,30,1,Ten beautiful television article behind stock.,3,default_product.png,TRUE,3/30/2021,2/7/2024
+15,Diverse even-keeled encryption,Chad Johnson,79.46,49.08,73,2,Travel spring industry when dark avoid customer.,20,default_product.png,FALSE,3/21/2023,1/17/2024
+16,Profound discrete attitude,Ashley Garrett,36.77,39.58,70,6,Lay fight detail a.,20,default_product.png,TRUE,3/18/2022,3/10/2024
+17,Innovative clear-thinking throughput,Joyce Flores,7.54,47.5,100,8,Lay citizen car so ground role role.,3,default_product.png,TRUE,1/12/2021,3/8/2024
+18,Vision-oriented client-driven hierarchy,Holly Blankenship,27.81,38.13,65,10,Situation back first enter team product against.,19,default_product.png,TRUE,10/23/2023,1/31/2024
+19,Team-oriented user-facing benchmark,Mrs. Regina Jordan,69.96,46.03,48,7,Politics machine myself.,5,default_product.png,TRUE,10/2/2021,1/10/2024
+20,Synchronized foreground intranet,Michelle Wilson,17.02,0.58,31,5,Late leg find ok house shoulder.,1,default_product.png,TRUE,9/13/2020,2/4/2024
+21,Up-sized contextually-based open architecture,Elizabeth Gallagher,61.84,58.77,75,9,Race care have main.,17,default_product.png,FALSE,6/2/2021,2/13/2024
+22,Proactive multi-tasking architecture,Christopher Stewart,36.38,65,88,6,You admit statement study phone.,1,default_product.png,FALSE,7/8/2023,2/16/2024
+23,Vision-oriented leadingedge info-mediaries,Brandon Thomas,95.68,80.7,54,8,Lot return certain act simple partner by whole.,9,default_product.png,TRUE,12/24/2022,1/19/2024
+24,Inverse empowering ability,Karen Payne,49.42,73.32,62,1,Fly media quality sport.,20,default_product.png,TRUE,3/19/2023,2/2/2024
+25,Total 3rdgeneration utilization,Jimmy Garcia,23.6,10.26,56,5,Condition responsibility writer affect common prove language.,5,default_product.png,FALSE,10/29/2023,3/14/2024
+26,Monitored cohesive adapter,Thomas Wright,26.54,16.26,14,7,You behind month either long whatever.,7,default_product.png,TRUE,4/22/2021,1/8/2024
+27,Versatile zero tolerance protocol,Brett Walker,36.44,97.23,100,10,Half onto week employee them.,1,default_product.png,FALSE,7/5/2022,2/20/2024
+28,Front-line value-added emulation,Laura Juarez,38.82,30.3,73,4,Analysis clear drop lot value region eight hour.,13,default_product.png,TRUE,2/14/2020,2/23/2024
+29,Profound intermediate info-mediaries,Chelsea Gray,36.72,15.17,14,3,Make fly move marriage start no.,5,default_product.png,FALSE,12/25/2020,2/12/2024
+30,Team-oriented solution-oriented concept,Thomas Lynch,25.04,52.83,40,2,Expect those economic leader.,6,default_product.png,FALSE,2/5/2024,1/21/2024
+31,Ergonomic web-enabled forecast,Matthew Martinez,29.99,65.44,31,3,Back business but today consumer.,2,default_product.png,FALSE,11/24/2023,2/15/2024
+32,Synchronized systemic knowledge user,Kimberly Park,3.59,68.94,92,5,Walk still bag growth despite decision fear economy.,3,default_product.png,TRUE,12/22/2020,3/10/2024
+33,Cross-platform tertiary time-frame,Robert Jimenez,35.97,23.3,91,3,Least good kitchen read concern future choice necessary.,18,default_product.png,TRUE,1/20/2021,1/6/2024
+34,Synergized responsive neural-net,Sarah Velez,70.18,93.99,59,4,Along worry they person agency I itself.,1,default_product.png,FALSE,1/24/2024,1/30/2024
+35,Optimized exuding infrastructure,Monica Reynolds,59.74,20.61,62,3,Probably six year film black bar.,3,default_product.png,TRUE,9/18/2020,1/1/2024
+36,Fundamental human-resource access,Adam Jones,78.5,9.74,26,2,Coach vote especially computer.,14,default_product.png,TRUE,5/22/2021,1/14/2024
+37,Ergonomic national customer loyalty,Donna Nielsen,97.37,7.09,95,8,Next center body sit evening.,17,default_product.png,FALSE,3/18/2023,1/29/2024
+38,Triple-buffered radical implementation,Brian Brewer,17.43,42.35,95,8,Prepare dog challenge family send energy pull.,4,default_product.png,TRUE,4/29/2023,3/15/2024
+39,Fully-configurable intermediate matrix,Lori Schwartz,35.77,24.73,48,1,Safe federal sport job.,17,default_product.png,FALSE,12/29/2021,2/28/2024
+40,Horizontal 4thgeneration policy,Jennifer Ford,98.94,73.4,94,5,Property strategy season lead film start.,15,default_product.png,FALSE,3/7/2022,1/17/2024
+41,Object-based well-modulated application,Justin Parker,32.5,63.26,29,7,Movie pass work identify church begin.,18,default_product.png,FALSE,9/9/2023,2/11/2024
+42,Triple-buffered incremental groupware,Joshua Johnson MD,69.23,12.38,35,7,By Republican wait tell.,12,default_product.png,TRUE,10/11/2022,2/10/2024
+43,Configurable coherent parallelism,David Hernandez,29.27,23.82,30,4,Character say most teach away many leader off.,12,default_product.png,TRUE,1/9/2021,2/27/2024
+44,Progressive dynamic matrix,Cindy Thomas,41.76,50.9,11,9,Player yard join around half one paper.,8,default_product.png,FALSE,8/9/2022,3/7/2024
+45,Multi-layered 24hour capability,Luis Stokes,96.28,36.06,92,3,Book mission total perhaps guy.,7,default_product.png,FALSE,9/16/2021,1/27/2024
+46,Sharable bi-directional open architecture,Anna Torres,78.68,23.03,24,6,Four amount possible real.,2,default_product.png,TRUE,12/1/2022,2/27/2024
+47,Multi-lateral local budgetary management,Kelly Glover,25.66,89.35,75,3,Red campaign realize couple professor life who.,15,default_product.png,FALSE,7/27/2021,1/28/2024
+48,Adaptive multi-tasking forecast,Dennis Kirby,9.66,50.75,79,9,Whatever rock world institution.,16,default_product.png,TRUE,9/8/2021,2/21/2024
+49,Programmable incremental array,Laura Rivera,90.03,89.41,57,4,Long move save air hope couple future.,13,default_product.png,FALSE,5/6/2022,1/29/2024
+50,Reduced directional neural-net,Michele Hernandez,41.25,74.68,96,3,Boy become blood everyone college finally.,20,default_product.png,FALSE,2/10/2024,1/31/2024
+51,Exclusive composite matrices,Franklin Cain,52.43,97.63,97,10,Perhaps better rich after.,15,default_product.png,TRUE,6/29/2022,3/2/2024
+52,Programmable discrete productivity,Andrew Dominguez,22.65,98.42,81,4,Light relationship way language.,4,default_product.png,FALSE,2/3/2022,1/27/2024
+53,Profit-focused zero tolerance algorithm,Larry Clements,17.73,63.47,73,6,Present then toward single thousand gun likely.,15,default_product.png,TRUE,10/22/2021,1/17/2024
+54,Inverse static hardware,Theresa Frost,24.46,54.93,67,1,Similar road should far goal.,19,default_product.png,TRUE,4/19/2021,2/8/2024
+55,Ergonomic user-facing leverage,Steven Carter,61.66,77.31,12,2,Dinner fish sometimes plant.,12,default_product.png,FALSE,7/13/2023,1/21/2024
+56,Stand-alone regional protocol,Joel Anderson,19.95,28.82,37,1,Speech score shake show.,20,default_product.png,FALSE,10/11/2020,1/10/2024
+57,Assimilated real-time product,Daniel Jensen,28.59,78.53,61,3,Least capital piece section real answer meet.,12,default_product.png,FALSE,5/21/2022,2/25/2024
+58,Re-engineered maximized application,Felicia Ellison,14.04,31.39,13,3,Natural interest rest arrive whatever.,13,default_product.png,TRUE,7/26/2023,1/24/2024
+59,Public-key bi-directional moratorium,Kim Benson,79.26,85.57,33,6,Through majority positive social rise.,10,default_product.png,TRUE,2/1/2021,1/4/2024
+60,Multi-channeled foreground structure,Bryce Mcintosh,80.8,20.7,48,9,Describe hit girl.,17,default_product.png,FALSE,6/10/2022,1/4/2024
+61,Self-enabling content-based benchmark,Rachel Gonzalez,37.83,8.24,73,1,Side couple party nearly response difficult sea full.,4,default_product.png,TRUE,12/11/2022,2/7/2024
+62,Versatile user-facing flexibility,Michael Anderson,53.38,90.47,35,2,Mr type where same save firm born.,15,default_product.png,TRUE,10/27/2023,1/23/2024
+63,Reduced neutral emulation,Jeffrey Pena III,45.83,8.59,28,5,Guy cause realize practice increase break street.,2,default_product.png,FALSE,4/11/2020,1/24/2024
+64,Compatible secondary firmware,Christopher Keller,52.85,51.42,35,9,College smile foreign center fine.,16,default_product.png,TRUE,7/6/2020,1/24/2024
+65,Ergonomic clear-thinking interface,Jennifer Hunter,25.15,29.5,15,1,Professor one company full.,12,default_product.png,TRUE,1/16/2022,3/18/2024
+66,Right-sized grid-enabled access,Andrew Armstrong,93.83,87.14,69,8,Coach president population throughout traditional effort.,8,default_product.png,TRUE,2/9/2023,1/7/2024
+67,Total composite budgetary management,Stephen Garcia,46.94,94.33,28,8,Front that use not investment either easy.,17,default_product.png,FALSE,7/10/2020,1/7/2024
+68,Assimilated 4thgeneration website,Tracy Hill,23.3,72.01,16,3,Successful develop station idea attorney night game.,6,default_product.png,TRUE,9/14/2021,3/14/2024
+69,Compatible demand-driven standardization,Jeff Ballard,34.88,45.19,64,9,Role other culture wind.,19,default_product.png,TRUE,2/26/2020,3/17/2024
+70,Profound needs-based protocol,Mario Harmon,93.69,65.83,77,7,Strong PM spend pretty.,19,default_product.png,TRUE,7/22/2022,2/14/2024
+71,Front-line systematic secured line,Jessica Wilson,59.37,63.49,17,10,City long land debate knowledge.,1,default_product.png,TRUE,3/25/2020,2/14/2024
+72,Re-contextualized object-oriented alliance,Jesse Allison,94.02,43.74,54,8,Training true concern.,8,default_product.png,FALSE,4/27/2021,1/17/2024
+73,Quality-focused uniform solution,William Adams,29.59,87.45,15,6,Cup college half itself challenge election hold.,1,default_product.png,FALSE,3/1/2020,1/16/2024
+74,Grass-roots intermediate emulation,Michael Little,81.73,30.46,21,6,Score true six right.,7,default_product.png,FALSE,7/6/2020,3/5/2024
+75,User-friendly zero administration approach,Justin Aguirre,59.73,99.76,63,7,Effort team choice magazine probably cultural daughter.,17,default_product.png,TRUE,3/5/2021,2/7/2024
+76,Ergonomic dynamic implementation,Terry Burns,2.55,26.69,18,9,Structure soon back to tax finally.,14,default_product.png,FALSE,4/26/2023,1/23/2024
+77,Cross-platform actuating time-frame,Robert Mcintyre,80.64,80.18,32,1,Window week huge light.,5,default_product.png,FALSE,11/27/2023,1/10/2024
+78,Centralized stable middleware,Sarah Perry,3.89,98.56,20,3,Provide suffer amount value relationship nation.,10,default_product.png,FALSE,6/11/2023,1/8/2024
+79,Self-enabling mobile moderator,Scott Morrison,50.68,17.8,65,10,Provide newspaper dinner hand really write stage.,19,default_product.png,FALSE,5/18/2021,1/16/2024
+80,Digitized zero-defect Graphical User Interface,Dalton Miller,58.64,13.64,65,7,Prepare everything early accept recently.,11,default_product.png,FALSE,7/4/2023,1/14/2024
+81,Ergonomic maximized info-mediaries,Matthew Malone,85.72,64.57,45,6,Serious might the hotel care country.,18,default_product.png,TRUE,10/15/2020,2/10/2024
+82,Public-key tangible conglomeration,Brendan Stevens,3.69,78.64,57,7,After up animal himself if.,20,default_product.png,FALSE,1/25/2022,2/9/2024
+83,Re-engineered optimizing contingency,Sharon Barton,72.1,10.33,82,4,Heavy worker during.,13,default_product.png,FALSE,5/29/2023,2/18/2024
+84,Proactive uniform pricing structure,Cindy Saunders,94.22,61.67,87,6,Might pull state crime reason fear career.,19,default_product.png,TRUE,12/7/2022,2/7/2024
+85,Profound didactic workforce,John Hale,5.8,51.23,94,3,Deal economy history level answer.,6,default_product.png,TRUE,9/24/2020,1/19/2024
+86,Optimized multi-state policy,Craig Merritt,37.86,97.25,11,8,Risk third its back four sea.,10,default_product.png,TRUE,3/29/2021,3/4/2024
+87,Fully-configurable stable Graphic Interface,Michael Williams,28.94,29.52,40,8,Box those high different.,12,default_product.png,FALSE,1/19/2023,1/10/2024
+88,Intuitive radical task-force,Amanda Keller,34.65,10.68,36,7,Throughout rock never who rich.,4,default_product.png,FALSE,1/9/2021,1/3/2024
+89,Face-to-face tangible success,Ricky Palmer,8.2,85.75,46,4,Program lawyer raise always note reason summer in.,10,default_product.png,FALSE,1/22/2024,1/16/2024
+90,Quality-focused holistic intranet,George Taylor,14.39,92.47,79,8,Woman live or including glass town.,14,default_product.png,TRUE,3/10/2021,2/21/2024
+91,Cross-group well-modulated algorithm,Allison Conrad,45.37,93.92,72,10,Want above factor thank guy finish nation.,14,default_product.png,FALSE,1/28/2021,2/6/2024
+92,Persistent dynamic infrastructure,Nancy Mayer,37.98,96.68,48,8,Ok book leader sound require direction.,6,default_product.png,FALSE,1/12/2023,3/8/2024
+93,Grass-roots interactive complexity,Mitchell Morales,39.97,2.09,27,7,Popular street sure.,20,default_product.png,FALSE,4/27/2021,2/26/2024
+94,Integrated user-facing benchmark,Nathan Sanchez,37.9,11.09,34,8,Project green next indeed.,8,default_product.png,TRUE,4/13/2023,2/25/2024
+95,Decentralized 6thgeneration concept,Mackenzie Hall,67.83,2.93,63,10,Chance later yard.,15,default_product.png,TRUE,10/26/2021,2/24/2024
+96,Object-based non-volatile standardization,Mackenzie Aguilar,0.4,94.82,92,10,Large save exist century wind.,14,default_product.png,TRUE,8/25/2021,2/17/2024
+97,Seamless 4thgeneration attitude,Christopher Gordon,55.18,58.33,94,8,Situation interest step huge detail.,19,default_product.png,TRUE,9/3/2020,1/2/2024
+98,Cross-group neutral time-frame,Jessica Schwartz,4.82,44.3,97,10,Book director term during medical course not here.,9,default_product.png,FALSE,3/10/2023,2/13/2024
+99,Configurable 24/7 attitude,James Horne,85.61,24,11,6,Outside prevent food forget.,13,default_product.png,FALSE,4/6/2021,1/11/2024
+100,Synergized holistic emulation,Tanner Benitez,34.99,87.5,85,9,Gas difficult attention.,12,default_product.png,TRUE,11/29/2020,2/8/2024

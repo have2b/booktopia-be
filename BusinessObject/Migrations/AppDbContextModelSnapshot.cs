@@ -35,6 +35,11 @@ namespace BusinessObject.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("BookName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -61,11 +66,6 @@ namespace BusinessObject.Migrations
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
                     b.Property<int>("PublisherId")
                         .HasColumnType("int");
 
@@ -79,6 +79,8 @@ namespace BusinessObject.Migrations
                     b.HasKey("BookId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("PublisherId");
 
                     b.ToTable("books");
                 });
@@ -104,38 +106,6 @@ namespace BusinessObject.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            CategoryName = "Business",
-                            Description = ""
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            CategoryName = "Personal Development",
-                            Description = ""
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            CategoryName = "Manga-Comic",
-                            Description = ""
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            CategoryName = "Psychology",
-                            Description = ""
-                        },
-                        new
-                        {
-                            CategoryId = 5,
-                            CategoryName = "Self-help",
-                            Description = ""
-                        });
                 });
 
             modelBuilder.Entity("BusinessObject.Model.Order", b =>
@@ -202,7 +172,7 @@ namespace BusinessObject.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("PublisherName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -298,20 +268,20 @@ namespace BusinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c8f0c882-21b4-4d61-84d2-a7cb32964b84",
+                            Id = "0ea247f7-623b-4a9a-bf6a-295184adf76b",
                             AccessFailedCount = 0,
                             Address = "",
-                            ConcurrencyStamp = "6c2afd13-c4ea-4ccc-a28a-4b392d29fe82",
-                            CreatedAt = new DateTime(2024, 2, 27, 13, 31, 14, 106, DateTimeKind.Local).AddTicks(7026),
+                            ConcurrencyStamp = "c98747c6-f05b-401e-afe8-87030130e965",
+                            CreatedAt = new DateTime(2024, 3, 20, 14, 15, 25, 927, DateTimeKind.Local).AddTicks(164),
                             EmailConfirmed = false,
                             IsActive = true,
-                            LastModifiedAt = new DateTime(2024, 2, 27, 13, 31, 14, 106, DateTimeKind.Local).AddTicks(7034),
+                            LastModifiedAt = new DateTime(2024, 3, 20, 14, 15, 25, 927, DateTimeKind.Local).AddTicks(172),
                             LockoutEnabled = false,
                             Name = "PrincipalAdmin",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJs+TxDOBkorokuG3XIAEwg7IqV9G/vETIDVTlzG2zXwaUHNJ9N3ANSlmo9aMND78w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA4FWvXgcgDOfx/ypE6aatePcyHmBpXzv80j90/E7KSCek4n5rN0pPB52UEs0jh2SQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "47877296-d859-4784-9a73-1f1fe8c8898c",
+                            SecurityStamp = "45afa547-9219-4c9f-8123-b653c6020e16",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -346,15 +316,15 @@ namespace BusinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eda5ef8e-8c93-464d-8e78-2f855502b2ae",
-                            ConcurrencyStamp = "0909152d-bdc8-4dbb-b459-c706ee85a270",
+                            Id = "3c910fe8-c6b0-4743-a517-1c702e26bbe2",
+                            ConcurrencyStamp = "adaa0c07-0a8d-48b2-8291-7e743ca9ae54",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "fec23b8a-78a2-48bf-8ee7-534b72c3be15",
-                            ConcurrencyStamp = "ffac2211-293b-4f14-b52c-82902a2dc684",
+                            Id = "ddf590f1-e320-498a-8a7c-184339d2817b",
+                            ConcurrencyStamp = "87e65bb5-3605-4dc4-8ce7-9d00252088d5",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -449,13 +419,13 @@ namespace BusinessObject.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "c8f0c882-21b4-4d61-84d2-a7cb32964b84",
-                            RoleId = "eda5ef8e-8c93-464d-8e78-2f855502b2ae"
+                            UserId = "0ea247f7-623b-4a9a-bf6a-295184adf76b",
+                            RoleId = "3c910fe8-c6b0-4743-a517-1c702e26bbe2"
                         },
                         new
                         {
-                            UserId = "c8f0c882-21b4-4d61-84d2-a7cb32964b84",
-                            RoleId = "fec23b8a-78a2-48bf-8ee7-534b72c3be15"
+                            UserId = "0ea247f7-623b-4a9a-bf6a-295184adf76b",
+                            RoleId = "ddf590f1-e320-498a-8a7c-184339d2817b"
                         });
                 });
 
@@ -486,7 +456,15 @@ namespace BusinessObject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BusinessObject.Model.Publisher", "Publisher")
+                        .WithMany("Books")
+                        .HasForeignKey("PublisherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("Publisher");
                 });
 
             modelBuilder.Entity("BusinessObject.Model.Order", b =>
@@ -583,6 +561,11 @@ namespace BusinessObject.Migrations
             modelBuilder.Entity("BusinessObject.Model.Order", b =>
                 {
                     b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("BusinessObject.Model.Publisher", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("BusinessObject.Model.User", b =>

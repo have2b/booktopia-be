@@ -21,11 +21,11 @@ public class BooksController : ControllerBase
 
     [HttpGet]
     [AllowAnonymous]
-    public async Task<IActionResult> Get([FromQuery] RequestDTO input)
+    public async Task<IActionResult> Get([FromQuery] RequestDTO input, [FromQuery] bool? latest)
     {
         try
         {
-            var books = await _repository.GetBooks(input);
+            var books = await _repository.GetBooks(input, latest);
             if (!books.Any())
             {
                 return NotFound(new ResponseDTO<Object>()

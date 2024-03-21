@@ -41,7 +41,7 @@ public class OrderDAO
             if (book == null) throw new BookNotFoundException(orderDetail.BookId);
             if (book.Quantity >= orderDetail.Quantity) continue;
             flag = false;
-            throw new InsufficientQuantityException(book.Name);
+            throw new InsufficientQuantityException(book.BookName);
         }
 
         if (flag)

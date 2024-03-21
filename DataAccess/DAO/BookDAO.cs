@@ -20,8 +20,15 @@ public class BookDAO
     public static BookDAO Instance => _instance.Value;
     
     // Get all books
-    public async Task<List<Book>> GetBooksAsync(RequestDTO input)
+    public async Task<List<Book>> GetBooksAsync(RequestDTO input, bool? latest)
     {
+        if (latest is true)
+        {
+            return await _context.Books
+                .OrderByDescending(b=> b.CreatedAt)
+                .Take(20)
+                .ToListAsync();
+        }
         return await _context.Books
             .Skip(input.PageIndex * input.PageSize)
             .Take(input.PageSize)

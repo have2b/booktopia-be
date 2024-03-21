@@ -75,13 +75,6 @@ public class AppDbContext : IdentityDbContext<User>
                 UserId = principalAdmin.Id
             }
             );
-        modelBuilder.Entity<Category>().HasData(
-            new Category { CategoryId = 1, CategoryName = "Business", Description = "" },
-            new Category { CategoryId = 2, CategoryName = "Personal Development", Description = "" },
-            new Category { CategoryId = 3, CategoryName = "Manga-Comic", Description = "" },
-            new Category { CategoryId = 4, CategoryName = "Psychology", Description = "" },
-            new Category { CategoryId = 5, CategoryName = "Self-help", Description = "" }
-            );
     }
 
     public DbSet<Category> Categories { get; set; }

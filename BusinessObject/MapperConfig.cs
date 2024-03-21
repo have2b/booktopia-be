@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessObject.DTO;
 using BusinessObject.Model;
+using BusinessObject.Model.CSV;
 
 namespace BusinessObject;
 
@@ -18,6 +19,7 @@ public class MapperConfig
             cfg.CreateMap<UserDTO, User>();
             cfg.CreateMap<User, UserDTO>();
             cfg.CreateMap<UserUpdateInfomationRequest, User>();
+            cfg.CreateMap<BookRecord, Book>();
         });
 
         var mapper = new Mapper(config);

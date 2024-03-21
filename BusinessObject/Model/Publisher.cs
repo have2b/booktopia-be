@@ -11,6 +11,8 @@ public class Publisher
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
     public int PublisherId { get; set; }
 
-    [Required, StringLength(100)] public string Name { get; set; }
+    [Required, StringLength(100)] public string PublisherName { get; set; }
     [Required, StringLength(20)] public string ContactNumber { get; set; }
+
+    public virtual ICollection<Book>? Books { get; set; }
 }

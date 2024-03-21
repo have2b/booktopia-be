@@ -27,6 +27,6 @@ public class Order
     [Required, StringLength(200)] public string? ShipAddress { get; set; }
     public DateTime CreatedAt { get; private set; } = DateTime.Now;
 
-    [JsonIgnore] public virtual User? User { get; set; }
-    [JsonIgnore] public virtual ICollection<OrderDetail>? OrderDetails { get; set; } = new List<OrderDetail>();
+    public virtual User? User { get; set; }
+    public virtual ICollection<OrderDetail>? OrderDetails { get; set; } = new List<OrderDetail>();
 }

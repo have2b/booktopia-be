@@ -20,6 +20,16 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Default")));
 
+// Add cors allow any origin
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(cfg =>
+    {
+        cfg.AllowAnyOrigin();
+        cfg.AllowAnyMethod();
+        cfg.AllowAnyHeader();
+    });
+});
 // For Identity
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
@@ -83,7 +93,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors();
 // Authentication & Authorization
 app.UseAuthentication();
 app.UseAuthorization();

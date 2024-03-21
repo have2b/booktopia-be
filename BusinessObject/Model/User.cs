@@ -21,5 +21,5 @@ public class User : IdentityUser
 
     // Call this method when the user data is updated
     public void UpdateLastModified() => LastModifiedAt = DateTime.Now;
-    [JsonIgnore] public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

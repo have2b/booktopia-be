@@ -139,7 +139,7 @@ namespace BookStoreAPI.Controllers
                 });
 
 
-            //Admin has full authority of all role
+            //Admin has full authority of all role  
             await _userManager.AddToRoleAsync(user, UserRole.Admin);
             await _userManager.AddToRoleAsync(user, UserRole.User);
 

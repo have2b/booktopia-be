@@ -13,7 +13,7 @@ public class Book
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), Required]
     public int BookId { get; set; }
 
-    [Required, StringLength(200)] public string Name { get; set; }
+    [Required, StringLength(200)] public string BookName { get; set; }
     [Required, StringLength(200)] public string Author { get; set; }
     [Required, Precision(4, 2)] public decimal CostPrice { get; set; }
     [Required, Precision(4, 2)] public decimal SellPrice { get; set; }
@@ -26,9 +26,10 @@ public class Book
     public string ImageUrl { get; set; } = "default_product.png";
 
     public bool IsActive { get; set; } = true;
-    public DateTime CreatedAt { get; private set; } = DateTime.Now;
-    public DateTime LastModifiedAt { get; private set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime LastModifiedAt { get; set; } = DateTime.Now;
 
-    [JsonIgnore] public virtual Category? Category { get; set; }
-    [JsonIgnore] public virtual ICollection<OrderDetail>? OrderDetails { get; set; } = new List<OrderDetail>();
+    public virtual Category? Category { get; set; }
+    public virtual Publisher? Publisher { get; set; }
+    public virtual ICollection<OrderDetail>? OrderDetails { get; set; } = new List<OrderDetail>();
 }

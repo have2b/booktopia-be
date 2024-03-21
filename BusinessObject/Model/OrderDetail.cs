@@ -14,6 +14,6 @@ public class OrderDetail
 
     [Required, Range(0, 99)] public int Discount { get; set; }
 
-    [JsonIgnore] public virtual Order? Order { get; set; }
-    [JsonIgnore] public virtual Book? Book { get; set; }
+    public virtual Order? Order { get; set; }
+    public virtual Book? Book { get; set; }
 }

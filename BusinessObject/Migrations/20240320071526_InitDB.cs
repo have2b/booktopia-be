@@ -73,7 +73,7 @@ namespace BusinessObject.Migrations
                 {
                     PublisherId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PublisherName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
@@ -195,7 +195,6 @@ namespace BusinessObject.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(4,2)", precision: 4, scale: 2, nullable: false),
                     ShipAddress = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -211,13 +210,15 @@ namespace BusinessObject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "products",
+                name: "books",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    BookId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(4,2)", precision: 4, scale: 2, nullable: false),
+                    BookName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    CostPrice = table.Column<decimal>(type: "decimal(4,2)", precision: 4, scale: 2, nullable: false),
+                    SellPrice = table.Column<decimal>(type: "decimal(4,2)", precision: 4, scale: 2, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
@@ -229,12 +230,18 @@ namespace BusinessObject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_products", x => x.ProductId);
+                    table.PrimaryKey("PK_books", x => x.BookId);
                     table.ForeignKey(
-                        name: "FK_products_categories_CategoryId",
+                        name: "FK_books_categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "categories",
                         principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_books_publishers_PublisherId",
+                        column: x => x.PublisherId,
+                        principalTable: "publishers",
+                        principalColumn: "PublisherId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -243,62 +250,51 @@ namespace BusinessObject.Migrations
                 columns: table => new
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    BookId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(4,2)", precision: 4, scale: 2, nullable: false)
+                    Discount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_order_details", x => new { x.OrderId, x.ProductId });
+                    table.PrimaryKey("PK_order_details", x => new { x.OrderId, x.BookId });
+                    table.ForeignKey(
+                        name: "FK_order_details_books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "books",
+                        principalColumn: "BookId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_order_details_orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "orders",
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_order_details_products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "d9b0a6e5-416d-4d72-9c46-81eb105ada11", "f8123d15-0952-405d-b86c-49746cb60e63", "User", "USER" },
-                    { "f05dcf30-b7d9-46a9-94c3-dcd8a6a7035e", "0040691b-ddc9-4228-b670-dd5bd25b08f9", "Admin", "ADMIN" }
-                });
+                values: new object[] { "3c910fe8-c6b0-4743-a517-1c702e26bbe2", "adaa0c07-0a8d-48b2-8291-7e743ca9ae54", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "ddf590f1-e320-498a-8a7c-184339d2817b", "87e65bb5-3605-4dc4-8ce7-9d00252088d5", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "CreatedAt", "Email", "EmailConfirmed", "IsActive", "LastModifiedAt", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "34cc0c06-f9e1-4d99-93e6-f7e5562893fb", 0, "", "16e8fd0e-e004-4f41-9e6f-469daac4c368", new DateTime(2024, 2, 25, 20, 26, 4, 114, DateTimeKind.Local).AddTicks(7084), null, false, true, new DateTime(2024, 2, 25, 20, 26, 4, 114, DateTimeKind.Local).AddTicks(7091), false, null, "PrincipalAdmin", null, "ADMIN", "AQAAAAEAACcQAAAAEE5NWgiQevtiITizl1VoAeWcDvzX1rrRg6oPAXUMiq3SWenNX/RnjhUXF37jGZz3og==", null, false, "6b97335f-1af4-439c-8c2d-8c690487bdc4", false, "admin" });
-
-            migrationBuilder.InsertData(
-                table: "categories",
-                columns: new[] { "CategoryId", "CategoryName", "Description" },
-                values: new object[,]
-                {
-                    { 1, "Business", "" },
-                    { 2, "Personal Development", "" },
-                    { 3, "Manga-Comic", "" },
-                    { 4, "Psychology", "" },
-                    { 5, "Self-help", "" }
-                });
+                values: new object[] { "0ea247f7-623b-4a9a-bf6a-295184adf76b", 0, "", "c98747c6-f05b-401e-afe8-87030130e965", new DateTime(2024, 3, 20, 14, 15, 25, 927, DateTimeKind.Local).AddTicks(164), null, false, true, new DateTime(2024, 3, 20, 14, 15, 25, 927, DateTimeKind.Local).AddTicks(172), false, null, "PrincipalAdmin", null, "ADMIN", "AQAAAAEAACcQAAAAEA4FWvXgcgDOfx/ypE6aatePcyHmBpXzv80j90/E7KSCek4n5rN0pPB52UEs0jh2SQ==", null, false, "45afa547-9219-4c9f-8123-b653c6020e16", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "d9b0a6e5-416d-4d72-9c46-81eb105ada11", "34cc0c06-f9e1-4d99-93e6-f7e5562893fb" });
+                values: new object[] { "3c910fe8-c6b0-4743-a517-1c702e26bbe2", "0ea247f7-623b-4a9a-bf6a-295184adf76b" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "f05dcf30-b7d9-46a9-94c3-dcd8a6a7035e", "34cc0c06-f9e1-4d99-93e6-f7e5562893fb" });
+                values: new object[] { "ddf590f1-e320-498a-8a7c-184339d2817b", "0ea247f7-623b-4a9a-bf6a-295184adf76b" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -340,19 +336,24 @@ namespace BusinessObject.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_order_details_ProductId",
+                name: "IX_books_CategoryId",
+                table: "books",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_books_PublisherId",
+                table: "books",
+                column: "PublisherId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_order_details_BookId",
                 table: "order_details",
-                column: "ProductId");
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_orders_UserId",
                 table: "orders",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_products_CategoryId",
-                table: "products",
-                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -376,22 +377,22 @@ namespace BusinessObject.Migrations
                 name: "order_details");
 
             migrationBuilder.DropTable(
-                name: "publishers");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "books");
 
             migrationBuilder.DropTable(
                 name: "orders");
 
             migrationBuilder.DropTable(
-                name: "products");
+                name: "categories");
+
+            migrationBuilder.DropTable(
+                name: "publishers");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "categories");
         }
     }
 }
