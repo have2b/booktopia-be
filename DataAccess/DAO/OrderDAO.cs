@@ -9,6 +9,7 @@ namespace DataAccess.DAO;
 public class OrderDAO
 {
     private readonly OrderDetailDAO _orderDetailDao = OrderDetailDAO.Instance;
+    private readonly UserDAO _userDao = UserDAO.Instance;
     private static readonly Lazy<OrderDAO> _instance = new(() => new OrderDAO(new AppDbContext()));
 
     private readonly AppDbContext _context;
@@ -30,10 +31,10 @@ public class OrderDAO
     }
 
     // Create order and order detail
-    public async Task<Order> AddOrderASync(OrderDTO model)
+    public async Task<Order> AddOrderASync(string userName, OrderDTO model)
     {
         var flag = true;
-
+        var user = await _userDao.GetFullfilUserByUserNameAsync(userName);
         // Check quantity of book
         foreach (var orderDetail in model.OrderDetails)
         {
@@ -48,6 +49,7 @@ public class OrderDAO
         {
             var mapper = MapperConfig.Init();
             var order = mapper.Map<Order>(model);
+            order.UserId = user.Id;
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
@@ -55,7 +57,7 @@ public class OrderDAO
             {
                 orderDetail.OrderId = order.OrderId;
             }
-            
+
             await _orderDetailDao.AddOrderDetailsAsync(model.OrderDetails);
             return order;
         }
