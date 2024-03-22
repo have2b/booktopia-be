@@ -1,3 +1,4 @@
+using BookStoreAPI.Services;
 using BusinessObject.Model;
 using DataAccess.Repository;
 using DataAccess.Repository.Interface;
@@ -18,6 +19,7 @@ builder.Services.AddScoped<IPublisherRepository, PublisherRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<StatisticsService>();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Default")));
 
 // Add cors allow any origin
