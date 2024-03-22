@@ -64,4 +64,25 @@ public class OrderDAO
 
         return null;
     }
+
+    public async Task<List<Order>> GetOrdersByDateRange(DateTime startDate, DateTime endDate)
+    {
+        return await _context.Orders.Include(x => x.OrderDetails).ThenInclude(y => y.Book)
+            .Where(x => x.CreatedAt >= startDate && x.CreatedAt <= endDate).ToListAsync();
+    }
+
+    public async Task<List<Order>> GetOrdersByYear(int year)
+    {
+        return await _context.Orders.Include(x => x.OrderDetails).ThenInclude(y => y.Book)
+            .Where(x => x.CreatedAt.Year == year).ToListAsync();
+    }
+
+    public async Task<List<Order>> GetRecentOrders(RequestDTO input)
+    {
+        return await _context.Orders.Include(x => x.OrderDetails).ThenInclude(y => y.Book).Include(x => x.User)
+            .OrderByDescending(x => x.CreatedAt)
+            .Skip(input.PageIndex * input.PageSize)
+            .Take(input.PageSize)
+            .ToListAsync();
+    }
 }
