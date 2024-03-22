@@ -56,7 +56,7 @@ public class OrdersController : ControllerBase
         try
         {
             order = await _repository.AddOrder(userName, model);
-            return Ok(new ResponseDTO<Order>() { Payload = order });
+            return Ok(new ResponseDTO<string>() { Payload = "Create Order successfully" });
         }
         catch (UserNotFoundException ex)
         {
