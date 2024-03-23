@@ -21,11 +21,11 @@ public class PublishersController : ControllerBase
 
     [HttpGet]
     [AllowAnonymous]
-    public async Task<IActionResult> Get([FromQuery] RequestDTO input)
+    public async Task<IActionResult> Get()
     {
         try
         {
-            var publishers = await _repository.GetPublishers(input);
+            var publishers = await _repository.GetPublishers();
             if (!publishers.Any())
             {
                 return NotFound(new ResponseDTO<Object>()
