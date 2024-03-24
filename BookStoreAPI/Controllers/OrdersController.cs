@@ -20,11 +20,11 @@ public class OrdersController : ControllerBase
 
     [HttpGet]
     [Authorize(Roles = UserRole.Admin)]
-    public async Task<IActionResult> Get([FromQuery] RequestDTO input)
+    public async Task<IActionResult> Get([FromQuery] RequestDTO input, [FromQuery] bool? latest)
     {
         try
         {
-            var orders = await _repository.GetOrders(input);
+            var orders = await _repository.GetOrders(input, latest);
             if (!orders.Any())
             {
                 return NotFound(new ResponseDTO<Object>()
@@ -35,7 +35,7 @@ public class OrdersController : ControllerBase
                 });
             }
 
-            return Ok(new ResponseDTO<Order[]>() { Payload = orders.ToArray() });
+            return Ok(new ResponseDTO<OrderInfoDTO[]>() { Payload = orders.ToArray() });
         }
         catch (Exception ex)
         {
@@ -74,6 +74,94 @@ public class OrdersController : ControllerBase
                 Success = false,
                 Payload = null,
                 Error = new ErrorDetails() { Code = 500, Message = ex.Message }
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
+            });
+        }
+    }
+
+    [HttpGet("{orderId}/OrderDetails")]
+    [Authorize(Roles = UserRole.Admin)]
+    public async Task<IActionResult> GetOrderDetailsByOrderId(int orderId)
+    {
+        try
+        {
+            var orderDetails = await _repository.GetOrderDetailByOrderId(orderId);
+            if (!orderDetails.Any())
+            {
+                return NotFound(new ResponseDTO<Object>()
+                {
+                    Success = false,
+                    Payload = null,
+                    Error = new ErrorDetails() { Code = 404, Message = "No orders found." }
+                });
+            }
+
+            return Ok(new ResponseDTO<OrderDetailInfoDTO[]>() { Payload = orderDetails.ToArray() });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
+            });
+        }
+    }
+
+    [HttpGet("{orderId}")]
+    [Authorize(Roles = UserRole.Admin)]
+    public async Task<IActionResult> GetOrderByOrderId(int orderId)
+    {
+        try
+        {
+            var order = await _repository.GetOrderByOrderId(orderId);
+            if (order == null)
+            {
+                return NotFound(new ResponseDTO<Object>()
+                {
+                    Success = false,
+                    Payload = null,
+                    Error = new ErrorDetails() { Code = 404, Message = "Not found." }
+                });
+            }
+
+            return Ok(new ResponseDTO<OrderInfoDTO>() { Payload = order });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
+            });
+        }
+    }
+
+    [HttpPut("{orderId}/status")]
+    public async Task<IActionResult> updateOrderStatus(int orderId, [FromBody] OrderChangeStatusDTO model)
+    {
+        try
+        {
+            var order = await _repository.UpdateOrderStatus(orderId, model.Status);
+            return Ok(new ResponseDTO<Order>() { Payload = order });
+        }
+        catch (OrderNotFoundException ex)
+        {
+            return NotFound(new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 404, Message = $"Order#{orderId} was not found." }
             });
         }
         catch (Exception ex)

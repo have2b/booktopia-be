@@ -8,7 +8,7 @@ namespace DataAccess.Repository;
 public class OrderRepository : IOrderRepository
 {
     private readonly OrderDAO _dao = OrderDAO.Instance;
-    public Task<List<Order>> GetOrders(RequestDTO input) => _dao.GetOrdersAsync(input);
+    public Task<List<OrderInfoDTO>> GetOrders(RequestDTO input, bool? latest) => _dao.GetOrdersAsync(input, latest);
 
     public Task<Order> AddOrder(string userName, OrderDTO model) => _dao.AddOrderASync(userName, model);
 
@@ -17,4 +17,9 @@ public class OrderRepository : IOrderRepository
     public Task<List<Order>> GetOrdersByYear(int year) => _dao.GetOrdersByYear(year);
     public Task<List<Order>> GetRecentOrders(RequestDTO input) => _dao.GetRecentOrders(input);
 
+    public Task<List<OrderDetailInfoDTO>> GetOrderDetailByOrderId(int orderId) => _dao.GetOrderDetailByOrderId(orderId);
+
+    public Task<OrderInfoDTO> GetOrderByOrderId(int orderId) => _dao.GetOrderByOrderIdAsync(orderId);
+
+    public Task<Order> UpdateOrderStatus(int orderId, Order.StatusType status) => _dao.UpdateOrderStatus(orderId, status);
 }
