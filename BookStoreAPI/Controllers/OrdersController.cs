@@ -153,7 +153,7 @@ public class OrdersController : ControllerBase
         try
         {
             var order = await _repository.UpdateOrderStatus(orderId, model.Status);
-            return Ok(new ResponseDTO<Order>() { Payload = order });
+            return Ok(new ResponseDTO<OrderInfoDTO>() { Payload = order });
         }
         catch (OrderNotFoundException ex)
         {

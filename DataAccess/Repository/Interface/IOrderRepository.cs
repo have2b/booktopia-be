@@ -15,6 +15,6 @@ public interface IOrderRepository
     Task<List<Order>> GetOrdersByDateRange(DateTime startDate, DateTime endDate);
     Task<List<Order>> GetOrdersByYear(int year);
     Task<List<Order>> GetRecentOrders(RequestDTO input);
-    Task<Order> UpdateOrderStatus(int orderId, StatusType status);
+    Task<OrderInfoDTO> UpdateOrderStatus(int orderId, StatusType status);
 
 }

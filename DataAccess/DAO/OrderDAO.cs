@@ -117,14 +117,17 @@ public class OrderDAO
         return ConvertOrderToOrderInfoDTO(order);
     }
 
-    public async Task<Order> UpdateOrderStatus(int orderId, Order.StatusType status)
+    public async Task<OrderInfoDTO> UpdateOrderStatus(int orderId, Order.StatusType status)
     {
-        var order = await _context.Orders.FirstOrDefaultAsync(b => b.OrderId == orderId);
+        var order = await _context.Orders
+               .Include(x => x.User)
+            .Include(x => x.OrderDetails).ThenInclude(x => x.Book)
+            .FirstOrDefaultAsync(b => b.OrderId == orderId);
         if (order == null) throw new OrderNotFoundException(orderId);
         order.Status = status;
         _context.Orders.Update(order);
         await _context.SaveChangesAsync();
-        return order;
+        return ConvertOrderToOrderInfoDTO(order);
     }
 
     public decimal GetRevenueByOrder(Order order)
