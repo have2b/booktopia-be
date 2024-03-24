@@ -1,5 +1,6 @@
 ﻿using BusinessObject.DTO;
 using DataAccess.Repository.Interface;
+using static BusinessObject.Model.Order;
 
 namespace BookStoreAPI.Services
 {
@@ -15,8 +16,9 @@ namespace BookStoreAPI.Services
         public async Task<TotalRevenueProfitSaleByDateRangeDTO> GetTotalRevenueProfitSaleByDateRange(DateTime startDate, DateTime endDate)
         {
             var orders = await _repository.GetOrdersByDateRange(startDate, endDate);
-            var revenue = orders.Sum(x => x.OrderDetails.Sum(y => y.Quantity * y.Book.SellPrice * (1 - (decimal)y.Discount / 100)));
-            var profit = revenue - orders.Sum(x => x.OrderDetails.Sum(y => y.Quantity * y.Book.CostPrice));
+            var shippedOrders = orders.Where(x => x.Status == StatusType.Shipped).ToList();
+            var revenue = shippedOrders.Sum(x => x.OrderDetails.Sum(y => y.Quantity * y.Book.SellPrice * (1 - (decimal)y.Discount / 100)));
+            var profit = revenue - shippedOrders.Sum(x => x.OrderDetails.Sum(y => y.Quantity * y.Book.CostPrice));
             return new TotalRevenueProfitSaleByDateRangeDTO
             {
                 NumberOfOrders = orders.Count,
@@ -29,9 +31,10 @@ namespace BookStoreAPI.Services
         {
             var revenueOverview = new List<decimal>();
             var orders = await _repository.GetOrdersByYear(year);
+            var shippedOrders = orders.Where(x => x.Status == StatusType.Shipped).ToList();
             for (int month = 1; month <= 12; month++)
             {
-                var revenueByMonth = orders.Where(x => x.CreatedAt.Month == month).Sum(x => x.OrderDetails?.Sum(y => y.Quantity * y.Book.SellPrice * (1 - (decimal)y.Discount / 100)));
+                var revenueByMonth = shippedOrders.Where(x => x.CreatedAt.Month == month).Sum(x => x.OrderDetails?.Sum(y => y.Quantity * y.Book.SellPrice * (1 - (decimal)y.Discount / 100)));
                 revenueOverview.Add(revenueByMonth ?? 0);
             }
             return revenueOverview;
