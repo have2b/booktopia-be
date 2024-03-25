@@ -1,7 +1,6 @@
 using BusinessObject.DTO;
 using BusinessObject.Model;
 using DataAccess.Exceptions;
-using DataAccess.Repository;
 using DataAccess.Repository.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,18 +21,18 @@ public class CategoriesController : ControllerBase
 
     [HttpGet]
     [AllowAnonymous]
-    public async Task<IActionResult> Get([FromQuery] RequestDTO input)
+    public async Task<IActionResult> Get()
     {
         try
         {
-            var categories = await _repository.GetCategories(input);
+            var categories = await _repository.GetCategories();
             if (!categories.Any())
             {
                 return NotFound(new ResponseDTO<Object>()
                 {
                     Success = false,
                     Payload = null,
-                    Error = new ErrorDetails() {Code = 404, Message = "There is no data in DB"}
+                    Error = new ErrorDetails() { Code = 404, Message = "There is no data in DB" }
                 });
             }
 

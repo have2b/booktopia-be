@@ -2,7 +2,6 @@
 using BusinessObject.DTO;
 using DataAccess.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace DataAccess.DAO;
 
@@ -23,11 +22,9 @@ public class CategoryDAO
     public static CategoryDAO Instance => _instance.Value;
 
     // Get all categories
-    public async Task<List<Category>> GetCategoriesAsync(RequestDTO input)
+    public async Task<List<Category>> GetCategoriesAsync()
     {
         return await _context.Categories
-            .Skip(input.PageIndex * input.PageSize)
-            .Take(input.PageSize)
             .ToListAsync();
     }
 

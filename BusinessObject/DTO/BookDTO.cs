@@ -1,12 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace BusinessObject.DTO;
 
 public class BookDTO
 {
-    [Required, StringLength(200)] public string Name { get; set; }
+    [Required, StringLength(200)] public string BookName { get; set; }
     [Required, StringLength(200)] public string Author { get; set; }
     [Required, Precision(4, 2)] public decimal CostPrice { get; set; }
     [Required, Precision(4, 2)] public decimal SellPrice { get; set; }

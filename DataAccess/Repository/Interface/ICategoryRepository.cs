@@ -5,7 +5,7 @@ namespace DataAccess.Repository.Interface;
 
 public interface ICategoryRepository
 {
-    Task<List<Category>> GetCategories(RequestDTO input);
+    Task<List<Category>> GetCategories();
     Task<Category> GetCategoryById(int id);
     Task<Category> AddCategory(CategoryDTO model);
     Task<Category> UpdateCategory(int id, CategoryDTO model);

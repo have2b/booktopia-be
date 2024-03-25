@@ -21,11 +21,9 @@ public class PublisherDAO
     public static PublisherDAO Instance => _instance.Value;
 
     // Get all publisher
-    public async Task<List<Publisher>> GetPublishersAsync(RequestDTO input)
+    public async Task<List<Publisher>> GetPublishersAsync()
     {
         return await _context.Publishers
-            .Skip(input.PageIndex * input.PageSize)
-            .Take(input.PageSize)
             .ToListAsync();
     }
 
