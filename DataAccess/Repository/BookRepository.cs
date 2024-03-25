@@ -8,7 +8,7 @@ namespace DataAccess.Repository;
 public class BookRepository : IBookRepository
 {
     private readonly BookDAO _dao = BookDAO.Instance;
-    public Task<List<Book>> GetBooks(RequestDTO input, bool? latest, string? sort) => _dao.GetBooksAsync(input, latest, sort);
+    public Task<ListBooksResponseDTO> GetBooks(SearchBookDTO input, bool? latest) => _dao.GetBooksAsync(input, latest);
     public Task<List<Book>> SearchBooks(SearchBookDTO model) => _dao.SearchBook(model);
     public Task<Book> GetBookById(int id) => _dao.GetBookByIdAsync(id);
     public Task<Book> AddBook(BookDTO model) => _dao.AddBookASync(model);

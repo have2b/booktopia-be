@@ -5,7 +5,7 @@ namespace DataAccess.Repository.Interface;
 
 public interface IBookRepository
 {
-    Task<List<Book>> GetBooks(RequestDTO input, bool? latest, string? sort);
+    Task<ListBooksResponseDTO> GetBooks(SearchBookDTO input, bool? latest);
     Task<List<Book>> SearchBooks(SearchBookDTO model);
     Task<Book> GetBookById(int id);
     Task<Book> AddBook(BookDTO model);

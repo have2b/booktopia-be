@@ -4,7 +4,6 @@ using DataAccess.Exceptions;
 using DataAccess.Repository.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookStoreAPI.Controllers;
 
@@ -69,12 +68,12 @@ public class BooksController : ControllerBase
 
     [HttpGet]
     [AllowAnonymous]
-    public async Task<IActionResult> Get([FromQuery] RequestDTO input, [FromQuery] bool? latest, [FromQuery] string? sort)
+    public async Task<IActionResult> Get([FromQuery] SearchBookDTO input, [FromQuery] bool? latest)
     {
         try
         {
-            var books = await _repository.GetBooks(input, latest, sort);
-            if (!books.Any())
+            var result = await _repository.GetBooks(input, latest);
+            if (result.Books == null || result.Books.Count == 0)
             {
                 return NotFound(new ResponseDTO<Object>()
                 {
@@ -84,7 +83,7 @@ public class BooksController : ControllerBase
                 });
             }
 
-            return Ok(new ResponseDTO<Book[]>() { Payload = books.ToArray() });
+            return Ok(new ResponseDTO<ListBooksResponseDTO>() { Payload = result });
         }
         catch (Exception ex)
         {

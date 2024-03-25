@@ -46,19 +46,37 @@ public class BookDAO
     }
 
     // Get all books
-    public async Task<List<Book>> GetBooksAsync(RequestDTO input, bool? latest, string? sort)
+    public async Task<ListBooksResponseDTO> GetBooksAsync(SearchBookDTO input, bool? latest)
     {
-        IQueryable<Book> query = _context.Books;
-
+        var query = _context.Books.Include(b => b.Category).Include(b => b.Publisher).AsQueryable();
         if (latest is true)
         {
-            return await query
+            var LastestBooks = await query
                 .OrderByDescending(b => b.CreatedAt)
                 .Take(20)
                 .ToListAsync();
+            return new ListBooksResponseDTO
+            {
+                Books = LastestBooks,
+                Total = LastestBooks.Count
+            };
         }
 
-        switch (sort)
+        if (!string.IsNullOrEmpty(input.BookName))
+            query = query.Where(b => b.BookName.Contains(input.BookName));
+
+        if (!string.IsNullOrEmpty(input.CategoryId) && int.TryParse(input.CategoryId, out var catId))
+            query = query.Where(b => b.CategoryId == catId);
+
+        if (!string.IsNullOrEmpty(input.Author))
+            query = query.Where(b => b.Author.Contains(input.Author));
+
+        if (!string.IsNullOrEmpty(input.PublisherName))
+            query = query.Where(b => b.Publisher.PublisherName.Contains(input.PublisherName));
+
+
+
+        switch (input.sort)
         {
             case "nameDesc":
                 query = query.OrderByDescending(b => b.BookName);
@@ -73,11 +91,16 @@ public class BookDAO
                 query = query.OrderBy(b => b.SellPrice);
                 break;
         }
-
-        return await query
+        var total = query.Count();
+        var books = await query
             .Skip(input.PageIndex * input.PageSize)
             .Take(input.PageSize)
             .ToListAsync();
+        return new ListBooksResponseDTO
+        {
+            Books = books,
+            Total = total
+        };
     }
 
 

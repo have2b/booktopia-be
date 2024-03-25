@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BusinessObject.Model;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,4 +17,10 @@ public class BookDTO
 
     [StringLength(255), DataType(DataType.ImageUrl)]
     public string ImageUrl { get; set; } = "default_product.png";
+}
+
+public class ListBooksResponseDTO
+{
+    public List<Book>? Books { get; set; }
+    public int Total { get; set; }
 }
