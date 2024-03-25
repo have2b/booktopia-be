@@ -106,6 +106,13 @@ namespace BookStoreAPI.Controllers
                     continue;
                 }
                 var mapper = MapperConfig.Init();
+                if (record.CostPrice > record.SellPrice)
+                {
+                    var tmp = record.CostPrice;
+                    record.CostPrice = record.SellPrice;
+                    record.SellPrice = tmp;
+                    
+                }
                 var book = mapper.Map<Book>(record);
 
                 await _context.Books.AddAsync(book);

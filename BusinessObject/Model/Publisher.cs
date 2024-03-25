@@ -14,5 +14,6 @@ public class Publisher
     [Required, StringLength(100)] public string PublisherName { get; set; }
     [Required, StringLength(20)] public string ContactNumber { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<Book>? Books { get; set; }
 }

@@ -4,6 +4,7 @@ using DataAccess.Exceptions;
 using DataAccess.Repository.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookStoreAPI.Controllers;
 
@@ -19,13 +20,60 @@ public class BooksController : ControllerBase
         _repository = repository;
     }
 
-    [HttpGet]
+    [HttpGet("count")]
     [AllowAnonymous]
-    public async Task<IActionResult> Get([FromQuery] RequestDTO input, [FromQuery] bool? latest)
+    public async Task<IActionResult> GetBookCount()
+    {
+        var count = await _repository.GetBookCount();
+
+        return Ok(new ResponseDTO<object>()
+        {
+            Payload = new
+            {
+                BookCount = count,
+                PageCount = count / 9
+            }
+        });
+    }
+
+    [HttpPost("search")]
+    [AllowAnonymous]
+    public async Task<IActionResult> SearchBook([FromBody] SearchBookDTO model)
     {
         try
         {
-            var books = await _repository.GetBooks(input, latest);
+            var books = await _repository.SearchBooks(model);
+            if (!books.Any())
+            {
+                return NotFound(new ResponseDTO<Object>()
+                {
+                    Success = false,
+                    Payload = null,
+                    Error = new ErrorDetails() { Code = 404, Message = "No books found." }
+                });
+            }
+
+            return Ok(new ResponseDTO<Book[]>() { Payload = books.ToArray() });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
+            });
+        }
+    }
+
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> Get([FromQuery] RequestDTO input, [FromQuery] bool? latest, [FromQuery] string? sort)
+    {
+        try
+        {
+            var books = await _repository.GetBooks(input, latest, sort);
             if (!books.Any())
             {
                 return NotFound(new ResponseDTO<Object>()
@@ -68,7 +116,7 @@ public class BooksController : ControllerBase
                 Error = new ErrorDetails() { Code = 404, Message = $"Book with id: {id} not found." }
             });
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return StatusCode(500, new ResponseDTO<Object>()
             {
@@ -109,7 +157,7 @@ public class BooksController : ControllerBase
 
             return Ok(updatedBook);
         }
-        catch (BookNotFoundException ex)
+        catch (BookNotFoundException)
         {
             return NotFound(new ResponseDTO<Object>()
             {
@@ -138,7 +186,7 @@ public class BooksController : ControllerBase
 
             return Ok(deletedBook);
         }
-        catch (BookNotFoundException ex)
+        catch (BookNotFoundException)
         {
             return NotFound(new ResponseDTO<Object>()
             {
@@ -168,7 +216,7 @@ public class BooksController : ControllerBase
 
             return CreatedAtAction(nameof(Post), importedBook);
         }
-        catch (BookNotFoundException ex)
+        catch (BookNotFoundException)
         {
             return NotFound(new ResponseDTO<Object>()
             {
@@ -177,7 +225,7 @@ public class BooksController : ControllerBase
                 Error = new ErrorDetails() { Code = 404, Message = $"Book with id: {model.BookId} not found." }
             });
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return StatusCode(500, new ResponseDTO<Object>()
             {
