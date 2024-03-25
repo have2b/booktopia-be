@@ -28,5 +28,6 @@ public class Order
     public DateTime CreatedAt { get; private set; } = DateTime.Now;
 
     public virtual User? User { get; set; }
+    [JsonIgnore]
     public virtual ICollection<OrderDetail>? OrderDetails { get; set; } = new List<OrderDetail>();
 }

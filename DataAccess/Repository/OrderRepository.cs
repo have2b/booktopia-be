@@ -22,4 +22,5 @@ public class OrderRepository : IOrderRepository
     public Task<OrderInfoDTO> GetOrderByOrderId(int orderId) => _dao.GetOrderByOrderIdAsync(orderId);
 
     public Task<OrderInfoDTO> UpdateOrderStatus(int orderId, Order.StatusType status) => _dao.UpdateOrderStatus(orderId, status);
+    public Task<List<OrderInfoDTO>> GetOrdersByUserId(string userName) => _dao.GetOrdersByUserId(userName);
 }

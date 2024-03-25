@@ -48,6 +48,36 @@ public class OrdersController : ControllerBase
         }
     }
 
+    [HttpGet("user")]
+    public async Task<IActionResult> Get()
+    {
+        string userName = User.FindFirst("username")?.Value;
+        try
+        {
+            var orders = await _repository.GetOrdersByUserId(userName);
+            if (!orders.Any())
+            {
+                return NotFound(new ResponseDTO<Object>()
+                {
+                    Success = false,
+                    Payload = null,
+                    Error = new ErrorDetails() { Code = 404, Message = "No orders found." }
+                });
+            }
+
+            return Ok(new ResponseDTO<OrderInfoDTO[]>() { Payload = orders.ToArray() });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ResponseDTO<Object>()
+            {
+                Success = false,
+                Payload = null,
+                Error = new ErrorDetails() { Code = 500, Message = "Internal server error. Please try again later." }
+            });
+        }
+    }
+
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] OrderDTO model)
     {

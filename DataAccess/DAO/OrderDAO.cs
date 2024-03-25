@@ -104,6 +104,15 @@ public class OrderDAO
             .ToListAsync();
     }
 
+    public async Task<List<OrderInfoDTO>> GetOrdersByUserId(string userName)
+    {
+        var user = await _userDao.GetFullfilUserByUserNameAsync(userName);
+        var  orders = new List<Order>();
+
+        orders =  await  _context.Orders.Include(o => o.User).Include(x => x.OrderDetails).ThenInclude(x => x.Book).Where(o => o.UserId.Equals(user.Id)).ToListAsync();
+        return orders.Select(x => ConvertOrderToOrderInfoDTO(x)).ToList();
+    }
+
     public async Task<List<OrderDetailInfoDTO>> GetOrderDetailByOrderId(int orderId)
     {
         return await _orderDetailDao.GetOrderDetailsByOrderIdAsync(orderId);
